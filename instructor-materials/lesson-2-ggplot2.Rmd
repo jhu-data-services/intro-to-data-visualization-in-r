@@ -1,0 +1,60 @@
+---
+title: "Lesson 2 - ggplot2"
+subtitle: "Introduction to Data Visualization in R"
+author: "JHU Data Services"
+date: "2021-11-03"
+output:
+  html_document: 
+    fig_caption: false
+    css: ".\/config\/style.css"
+    toc: true
+    toc_float: true
+    toc_depth: 3
+  pdf_document: default
+fig_width: 6 
+fig_height: 6
+---
+
+### Load the libraries and data.
+
+---
+
+Let's load in the Palmer penguin data, by importing the `palmerpenguins` package. If you have not already installed this package, you can do so now by running `install.packages('palmerpenguins')` in your R console. We will also load our libraries for plotting.
+```{r setup, eval=TRUE}
+
+# load libraries
+library(ggplot2)
+library(scales)
+library(RColorBrewer)
+library(palmerpenguins)
+
+# load in dataset
+data(package = "palmerpenguins")
+```
+
+### Explore the data
+
+--- 
+
+Let's explore the contents of the data. We can use the `head` command to look at the first few rows of the data. 
+```{r explore_data, eval=TRUE}
+head(penguins)
+```
+
+### Plotting in ggplot2
+
+When we create a plot with `ggplot2()` we do it incrementally, by adding a layer at a time. Lets begin by calling `ggplot()` and passing our dataset (`penguin`), and specifying the aesthetic mappings we would like to visualize (body mass and bill length).
+```{r ggplot2_skeleton, eval=TRUE}
+ggplot(data = penguins, aes(x = body_mass_g, 
+                            y = bill_length_mm))
+```
+
+Nothing is produced! This is bacause we need to add a layer. Let's add a `geom` layer, which will specify the geometric object we want to use to draw each observation.
+
+```{r ggplot2_points, eval=TRUE}
+ggplot(data = penguins, aes(x = body_mass_g, 
+                            y = bill_length_mm)) +
+  geom_point()
+
+```
+
