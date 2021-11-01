@@ -15,7 +15,6 @@ fig_width: 6
 fig_height: 6
 ---
 ```{r setup, echo=FALSE}
-source("r-markdown-config.R", local = knitr::knit_global())
 library(scales)
 library(RColorBrewer)
 ```
