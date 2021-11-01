@@ -1,0 +1,306 @@
+---
+title: "Lesson 1 - Base R"
+subtitle: "Introduction to Data Visualization in R"
+author: "JHU Data Services"
+date: "2021-11-03"
+output:
+  html_document: 
+    fig_caption: false
+    css: ".\/config\/style.css"
+    toc: true
+    toc_float: true
+    toc_depth: 3
+  pdf_document: default
+fig_width: 6 
+fig_height: 6
+---
+```{r setup, echo=FALSE}
+source("r-markdown-config.R", local = knitr::knit_global())
+library(scales)
+library(RColorBrewer)
+```
+
+# Introduction to Data Visualization in R: Base R plotting
+## Meet the penguins!
+
+We will be using the Palmer Penguins dataset for today's visualization exercises. 
+
+
+![Palmer Penguin Illustration](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){width=50%}
+
+Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network. The data were conveniently collected as an R package that we will install (if you haven't already) and use today.
+
+
+### Load the data
+
+---
+
+Let's load in the Palmer penguin data, by importing the `palmerpenguins` package. If you have not already installed this package, you can do so now by running `install.packages('palmerpenguins')` in your R console. 
+```{r load_data, eval=TRUE}
+# load in dataset
+library(palmerpenguins)
+data(package = "palmerpenguins")
+```
+
+
+
+### Explore the data
+
+--- 
+
+Let's explore the contents of the data. We can use the `head` command to look at the first few rows of the data. 
+```{r explore_data, eval=TRUE}
+head(penguins)
+```
+
+
+## R Base Graphics
+
+--- 
+
+Visualizing one variable is a useful way to understand the shape of the distribution of the variable in question. 
+
+
+### Histogram 
+
+---
+
+Let's begin with a histogram. We want to visualize the frequency that values in certain ranges occur in our data.
+```{r histogram, eval=TRUE}
+hist(penguins$bill_length_mm)
+```
+
+:::instruct
+
+#### Instructor Note:
+
+In descriptive statistics, a box plot (or box and whisker plot) is a method for visualizing a simple summary of the distribution of a continuous variable. A boxplot shows the distribution of data using five summary values: the "minimum", the first (or lower) quartile, the median, the third (or upper) quartile, and the "maximum".
+
+The middle line of the box is the median value. The top and bottom of the box are the "hinges" and corresponds to the lower and upper quartiles respectively. The whiskers extending outward are sometimes called the minimum and maximum, which introduces some confusion. They are actually the minimum and maximum values that *do not exceed a certain distance from the median*. That distance is 1.5 x the IQR. If no value exceeds that distance, than the whiskers *are* the minimum and maximum values.
+
+| Boxplot Element| Description|
+| :------------- |:-------------|
+| Interquartile Range (IQR) | Difference between Q3 and Q1 |
+| Maximum | $Q3 + (1.5*IQR)$| 
+| Minimum | $Q1 - (1.5*IQR)$|
+| Q1      | The median of the lower half of the dataset|   
+| Median | The median of the complete dataset.| 
+| Q3 | The median of the upper half of the dataset|
+:::
+
+
+### Boxplot
+
+---
+
+Boxplots provide a more concise representation of our data. Let's look at a boxplot of bill lengths to better understand how bill lengths are distributed among the penguins studied.
+
+```{r boxplot, eval=TRUE}
+boxplot(x = penguins$bill_length_mm)
+```
+
+### Scatterplot
+
+---
+
+Visualizing two variables allows you to study the relationship between them. Lets see how the penguin's bill length changes with respect to body mass.
+
+```{r scatter_plot, eval=TRUE}
+plot(x = penguins$body_mass_g, y = penguins$bill_length_mm) 
+```
+
+:::activity
+
+#### Activity:
+
+* What does this plot tell you about the relationship between penguin bill length and body mass? 
+* Do you notice anything unusual in this visualization?
+
+:::
+
+There appears to be a correlation between body mass and bill length. There appears to be an overall linear trend, but there appears to be some outliers in the upper left portion of the plot. Perhaps we can elucidate what is happening here by plotting more information. Let's color by species to see how species impacts this relationship.
+```{r scatter_plot_by_species, eval=TRUE}
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species)
+```
+
+
+### Creating a publication ready plot
+
+Let's begin by giving the plot meaningful axis titles using the `xlab` and `ylab` arguments for the x and y axes respectively.
+
+```{r scatter_plot_by_species_axis_labels, eval=TRUE}
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)")
+```
+
+Now let's add a title using the `main` argument.
+```{r scatter_plot_by_species_title, eval=TRUE}
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass")
+```
+
+Lets make the scatter points more visible using `pch` (plotting character), which controls the geometric shape used to represent our data. In this case, let's switch from the open circle to the solid circle.
+```{r scatter_plot_by_species_points, eval=TRUE}
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16)
+```
+
+Now let's increase the size of our points using the `cex` argument. `cex` controls the amount by which plotted symbols should be scaled. 1 is the default, 1.5 is 50% larger, .5 is 50% smaller, etc.
+```{r scatter_plot_by_species_size, eval=TRUE}
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+```
+
+How do we deal with dense scatterplots, where some points occlude others? We can add transparency to the points using the `alpha` function from the `scales` package, which allows us make points transparent, so you can see when they are layered on top of each other. An `alpha` of 1 is completely solid, 0 is completely transparent, and .5 is 50% transparent.
+```{r scatter_plot_by_species_transparency, eval=TRUE}
+palette(alpha(c("black","red","green"), alpha = .5))
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+```
+
+:::activity
+
+#### Activity:
+
+Can you identify any problems with the default color scheme?
+
+:::
+
+Let's use a colorblind friendly color palette. We will use the `RColorBrewer` package to generate a colorblind friendly palette. 
+
+```{r colorblind_friendly, eval=TRUE, echo=FALSE}
+display.brewer.all(colorblindFriendly = TRUE)
+```
+
+```{r scatter_plot_by_species_color, eval=TRUE}
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+palette(alpha(color_friendly_palette, alpha = .5))
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+```
+
+Now let's add a grid:
+```{r scatter_plot_by_species_grid, eval=TRUE}
+
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+palette(alpha(color_friendly_palette, alpha = .5))
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+grid()
+```
+
+Now let's remove unnecessary borders using the `bty` argument.
+```{r scatter_plot_by_species_border, eval=TRUE}
+
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+palette(alpha(color_friendly_palette, alpha = .5))
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l")
+grid()
+```
+
+Now let's increase the size of our labels.
+```{r scatter_plot_by_species_label_size, eval=TRUE}
+
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+palette(alpha(color_friendly_palette, alpha = .5))
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l",
+     cex.axis = 1.5,
+     cex.lab = 1.5,
+     cex.main = 1.5)
+grid()
+```
+
+Finally, let's left justify our plot tile and add a subtitle. We will use the margin text (`mtext`) command to annotate our plot in the margins. This is the easiest way to place a title and subtitle with fine control over its positioning.
+```{r scatter_plot_by_species_title_left, eval=TRUE}
+
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+palette(alpha(color_friendly_palette, alpha = .5))
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l",
+     cex.axis = 1.5,
+     cex.lab = 1.5,
+     cex.main = 1.5)
+mtext("Bill length and body mass", side=3, adj=0, line=2, cex=1.4, font=2); 
+mtext("Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER", side=3, adj=0, line=1, cex=.9, font=2); 
+grid()
+```
