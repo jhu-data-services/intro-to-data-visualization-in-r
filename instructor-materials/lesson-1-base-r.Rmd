@@ -15,8 +15,8 @@ fig_width: 6
 fig_height: 6
 ---
 ```{r setup, echo=FALSE}
-library(scales)
-library(RColorBrewer)
+library(scales) # Control the appearance of axis and legend labels
+library(RColorBrewer) # Produce visually appealing, colorblind friendly palettes
 ```
 
 # Introduction to Data Visualization in R: Base R plotting
