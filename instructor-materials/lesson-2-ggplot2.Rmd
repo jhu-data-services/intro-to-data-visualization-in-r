@@ -259,3 +259,143 @@ ggplot(data = penguins) +
 ```
 
 All of our modifications are lost. This is because the order of our theme matters. Because we call `theme_minimal()` after `theme()`, we overwrite any changes we made with the defaults from `theme_minimal()`. If we want to modify how `theme_minimal()` looks we do it after calling `theme_minimal()`.
+
+### Creating Titles (and Subtitles)
+
+---
+
+Now let's complete our plot with a title and subtitle:
+
+```{r ggplot2_manual_title, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  labs(title = "Bill length and body mass",
+       subtitle = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12)) 
+```
+
+### Modifying Legends
+
+---
+
+Now lets cleanup our legend. The species are made clear in the subtitle, so we can remove the legend title. 
+
+```{r ggplot2_legend, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  labs(title = "Bill length and body mass",
+       subtitle = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.position = "bottom") 
+```
+
+### Adding Statistical Summaries
+
+---
+
+Now let's add a statistical summary. we will use the `geom_smooth()` layer to add fit a smoothed line to each group, along with confidence intervals. The default method (when there is less than 1000 points) is locally estimated scatterplot smoothing (LOESS) which is a generalization of a moving average and polynomial regression. 
+
+```{r ggplot2_stats, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  geom_smooth(aes(x = body_mass_g,
+                  y = bill_length_mm,
+                  color = species)) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  labs(title = "Bill length and body mass",
+       subtitle = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.position = "bottom") 
+```
+
+
+### Local vs Global Aesthetics
+
+---
+
+Do you notice how we had to repeat the `aes()` arguments for `geom_point()` and `geom_smooth()`? This seems redundant. Right now we declare the aesthetics every time we add a new geom layer, but if the aesthetics are the same for every layer, we can just declare them once. Aesthetics declared in `ggplot()` are global, and apply to every layer. Aesthetics applied to a specific geom layer, such as `geom_point()` are local, and only apply to that geom layer.
+
+
+```{r ggplot2_scope, eval=TRUE}
+ggplot(data = penguins,
+       aes(x = body_mass_g,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point(size = 3,
+             alpha = .5) +
+  geom_smooth() +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  labs(title = "Bill length and body mass",
+       subtitle = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.position = "bottom") 
+```
+
+### Facets
+
+---
+
+If our data is too dense, we can split it into small multiples using facets:
+
+```{r ggplot2_facet, eval=TRUE}
+ggplot(data = penguins,
+       aes(x = flipper_length_mm,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point(size = 3,
+             alpha = .5) +
+  geom_smooth() +
+  facet_wrap(~species, nrow = 3) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Flipper Length (mm)") +
+  ylab("Bill Length (mm)") +
+  labs(title = "Bill length and body mass",
+       subtitle = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.position = "none") 
+```
