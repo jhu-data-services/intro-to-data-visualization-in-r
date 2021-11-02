@@ -15,7 +15,27 @@ fig_width: 6
 fig_height: 6
 ---
 
-### Load the libraries and data.
+# Introduction to ggplot2
+
+---
+
+ggplot2 is an R package for producing graphics, and it is particularly well suited to producing statistical graphics. ggplot2 is based on the Grammar of Graphics, which describes a series of components that make up graphs. ggplot2 allows you to build graphs out of these independent components, much like Legos. Rather than be limited to a set number of predefined graphs, you can create a vast variety of graphics by adding, removing, and mixing these components.
+
+Today we will learn what these components are, and how we can combine them to create effective graphics in R.
+
+## Key components
+
+Each ggplot2 plot has three key components:
+
+* **Data**: The dataframe you would like to plot.
+* **Aesthetic mappings** between the variables of interest in your data, and a visual property (like size, color, or position)
+* At least one **layer**. Layers describe how observations should be rendered (bars, points, etc) and are created with the **geom** function.
+
+# Lets Practice!
+
+---
+
+## Load the libraries and data.
 
 ---
 
@@ -32,7 +52,7 @@ library(palmerpenguins)
 data(package = "palmerpenguins")
 ```
 
-### Explore the data
+## Explore the data
 
 --- 
 
@@ -41,20 +61,201 @@ Let's explore the contents of the data. We can use the `head` command to look at
 head(penguins)
 ```
 
-### Plotting in ggplot2
+## Using ggplot2
 
-When we create a plot with `ggplot2()` we do it incrementally, by adding a layer at a time. Lets begin by calling `ggplot()` and passing our dataset (`penguin`), and specifying the aesthetic mappings we would like to visualize (body mass and bill length).
+--- 
+
+### Plotting Data
+
+--- 
+
+When we create a plot with `ggplot2()` we do it incrementally, by adding a layer at a time. Lets begin by calling `ggplot()` and passing our dataset (`penguin`).
+
+::: activity
+
+#### Activity
+
+What happens when we run: `ggplot(data = penguins)`?
+
+:::
+
 ```{r ggplot2_skeleton, eval=TRUE}
-ggplot(data = penguins, aes(x = body_mass_g, 
-                            y = bill_length_mm))
+ggplot(data = penguins)
 ```
 
-Nothing is produced! This is bacause we need to add a layer. Let's add a `geom` layer, which will specify the geometric object we want to use to draw each observation.
+Nothing is produced! This is because we need to add a layer. Let's add a `geom` layer, which will specify the geometric object we want to use to draw each observation. Let's use `geom_point()` to create a scatter plot. Try to run the code again with `geom_point()` added and see what happens?
 
-```{r ggplot2_points, eval=TRUE}
-ggplot(data = penguins, aes(x = body_mass_g, 
-                            y = bill_length_mm)) +
+
+```{r ggplot2_points, eval=FALSE}
+ggplot(data = penguins) +
   geom_point()
 
 ```
 
+We received an error because we haven't specified what elements of our data we want to plot.
+
+Lets map to variables in our data to aesthetic elements. In this case let's map `body_mass_g` to the x-axis, and `bill_length_mm` to the y-axis. 
+
+```{r ggplot2_points_aesth, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x =body_mass_g, 
+                 y = bill_length_mm))
+```
+It worked! 
+
+### Modifying Aesthetics
+
+---
+
+Now lets configure another aesthetic of `geom_point()` by specifying a color for the points, using the argument `color`. Lets use the color `"steelblue"`.
+
+:::activity
+#### Activity
+
+Add `color = "steelblue"` as an additional argument to `aes()` within geom_point
+
+What happens?
+:::
+
+```{r ggplot2_points_aes_color, eval=TRUE}
+
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = "steelblue")) 
+```
+
+The points are colored red, even though we explicitly specified that they be *steelblue*. This unexpected behaviour is related to how ggplot2 handles aesthetic arguments. Those that are defined within `aes()` map data to an aesthetic using a **scale**.
+
+Those that are defined outside of `aes()` are set to a fixed value. Let's try again, but move `color = "steelblue"` outside of `aes()`.
+
+```{r ggplot2_points_color, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm),
+                 color = "steelblue") 
+```
+
+That produces the result we expected. Remember, if you want to set an aesthetic to a fixed value (such as setting points to the color steelblue) then do it **outside** of `aes()`. If you want to map some variable of your data to an aesthetic automatically, then do it **inside** `aes()`
+
+Let's try mapping the species variable to color:
+
+```{r ggplot2_points_color_aes, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species))
+```
+
+This produces points colored by species, and automatically creates an appropriately named legend. The individual points look a little small, so let's increase their size.
+
+```{r ggplot2_points_size, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3)
+```
+
+Now let's add transparency so that we can see points being occluded by other points.
+
+```{r ggplot2_points_alpha, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5)
+```
+
+### Using RColorBrewer Palettes
+
+---
+
+This is looking better, but the default use of red and green is not colorblind friendly. Let's correct this by using a palette from RColorBrewer. Fortunately, with ggplot2 we can pass the palette directly in to ggplot2:
+
+```{r ggplot2_points_rcolorbrewer, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2")
+```
+
+Now let's clean up those axis labels:
+
+```{r ggplot2_points_labels, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)")
+```
+
+### Themes
+
+---
+
+Remember, never trust the defaults. Although ggplot2 plots look much nicer than base R, that does not mean they are ready for publication. There are a few things we can do to clean this plot up. Let's start my removing that unnecessary grey background. We can do this easily by applying the **minimal** theme:
+ 
+```{r ggplot2_theme, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  theme_minimal()
+```
+ 
+Lets increase the size of our x and y label font and axis label font to make the labels more visible. To do this, we will need to manually modify the theme:
+
+```{r ggplot2_manual_theme, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12)) 
+```
+
+:::activity
+
+#### Activity
+
+What happens when you switch the positions of `theme()` and `theme_minimal()`?
+:::
+
+```{r ggplot2_manual_theme_swap, eval=TRUE}
+ggplot(data = penguins) +
+  geom_point(aes(x = body_mass_g, 
+                 y = bill_length_mm,
+                 color = species),
+             size = 3,
+             alpha = .5) +
+  scale_color_brewer(palette = "Dark2") +
+  xlab("Body Mass (g)") +
+  ylab("Bill Length (mm)") +
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 12)) +
+  theme_minimal() 
+```
+
+All of our modifications are lost. This is because the order of our theme matters. Because we call `theme_minimal()` after `theme()`, we overwrite any changes we made with the defaults from `theme_minimal()`. If we want to modify how `theme_minimal()` looks we do it after calling `theme_minimal()`.
