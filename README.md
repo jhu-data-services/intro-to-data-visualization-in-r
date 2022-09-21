@@ -1,5 +1,5 @@
 # Introduction to Data Visualization in R
-Workshop materials and instructions for the 2022-09-21 *Introduction to Data Visualization in R* virtual workshop by, led by JHU Data Services. 
+Workshop materials and instructions for the 2022-09-21 *Introduction to Data Visualization in R* virtual workshop, led by JHU Data Services. 
 
 This workshop introduces data visualization in R using base R and `ggplot2`. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.
 
