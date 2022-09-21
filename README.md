@@ -1,24 +1,18 @@
 # Introduction to Data Visualization in R
-Workshop materials and instructions for the 2021-11-03 *Introduction to Data Visualization in R* virtual workshop by, led by JHU Data Services. 
+Workshop materials and instructions for the 2022-09-21 *Introduction to Data Visualization in R* virtual workshop by, led by JHU Data Services. 
 
 This workshop introduces data visualization in R using base R and `ggplot2`. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.
 
 ## Pre-Class Instructions
-Before the class, follow the [installation instructions to download all required software and tools for this workshop](link-to-github-installation-repo).
 
 
 ## Description of Files
-- **data**: This folder contains raw data files to be used during hands-on activities in the workshop
-- in-class-scripts: This folder contains code files you will need for the workshop:
-    - [file1]
-    - [file2]
-    - [file3]
 - **presentation-materials**: This folder contains PowerPoint slides and other presentation materials used in the workshop
 - **resources**: This folder contains cheatsheets to assist you during the workshop and links to external sources for you to continue your learning
 
 
 ## Post-Class Survey
-If you have taken the live webinar for this class, please take this survey: [link name](url)
+If you have taken the live webinar for this class, please take this survey: [Intro to Data Vis in R Survey](https://www.surveymonkey.com/r/datavis_r)
 
 ## JHU Data Services   
 Website: [dataservices.library.jhu.edu/](https://dataservices.library.jhu.edu/)   
@@ -40,4 +34,4 @@ The images, external resources, and cheatsheets linked in this repository may ha
 
 ## Citation
 Please cite this material as:    
-Johns Hopkins University Data Services. [Date of workshop]. [Workshop title]. [URL] 
+Johns Hopkins University Data Services. September 21, 2022. [Introduction to Data Visualization in R](github.com/jhu-data-services/intro-to-data-visualization-in-r)
