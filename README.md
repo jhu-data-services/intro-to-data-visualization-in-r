@@ -23,10 +23,10 @@ Make sure you’ve installed the following R packages:
 To install the packages, use the following commands in your R console:
 
 ```r
-install.packages(“ggplot2”)
-install.packages(“palmerpenguins”)
-install.packages(“scales”)
-install.packages(“RColorBrewer”)
+install.packages("ggplot2")
+install.packages("palmerpenguins")
+install.packages("scales")
+install.packages("RColorBrewer")
 ```
 
 ## Description of Files
