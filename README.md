@@ -7,8 +7,8 @@ This workshop introduces data visualization in R using base R and `ggplot2`. In 
 
 ### Software Installation
 - If you haven’t already, make sure you have downloaded and installed the following software: 
- - R - https://cran.r-project.org/
- - R Studio - https://www.rstudio.com/products/rstudio/download/ (Download “RStudio Desktop”, not “RStudio Server”)
+	- R - https://cran.r-project.org/
+	- RStudio - https://www.rstudio.com/products/rstudio/download/ (Download “RStudio Desktop”, not “RStudio Server”)
 - If it’s been a while since you’ve used R or R Studio, no worries! But check your versions and consider updating if you’re several versions behind.
 
 ### Software Setup
@@ -20,6 +20,14 @@ Make sure you’ve installed the following R packages:
 - **scales** (will help with modifying visuals in base R plots)
 - **RColorBrewer** (for generating colorblind friendly color palettes)
 
+To install the packages, use the following commands in your R console:
+
+```r
+install.packages(“ggplot2”)
+install.packages(“palmerpenguins”)
+install.packages(“scales”)
+install.packages(“RColorBrewer”)
+```
 
 ## Description of Files
 - **presentation-materials**: This folder contains PowerPoint slides and other presentation materials used in the workshop
