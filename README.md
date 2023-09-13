@@ -56,4 +56,4 @@ The images, external resources, and cheatsheets linked in this repository may ha
 
 ## Citation
 Please cite this material as:    
-Johns Hopkins University Data Services. September 21, 2022. [Introduction to Data Visualization in R](github.com/jhu-data-services/intro-to-data-visualization-in-r)
+Johns Hopkins University Data Services. September 12, 2023. [Introduction to Data Visualization in R](github.com/jhu-data-services/intro-to-data-visualization-in-r)
