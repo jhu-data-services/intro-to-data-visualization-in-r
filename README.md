@@ -17,7 +17,6 @@ Make sure you’ve installed the following R packages:
 
 - **ggplot2** (for plotting)
 - **palmerpenguins** (our data)
-- **scales** (will help with modifying visuals in base R plots)
 - **RColorBrewer** (for generating colorblind friendly color palettes)
 
 To install the packages, use the following commands in your R console:
