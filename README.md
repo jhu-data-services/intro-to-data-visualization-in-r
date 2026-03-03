@@ -1,5 +1,5 @@
 # Introduction to Data Visualization in R
-Workshop materials and instructions for the 2023-09-12 *Introduction to Data Visualization in R* virtual workshop, led by JHU Data Services. 
+Workshop materials and instructions for the 2026-03-06 *Introduction to Data Visualization in R* virtual workshop, led by JHU Data Services. 
 
 This workshop introduces data visualization in R using base R and `ggplot2`. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.
 
@@ -24,17 +24,9 @@ To install the packages, use the following commands in your R console:
 ```r
 install.packages("ggplot2")
 install.packages("palmerpenguins")
-install.packages("scales")
 install.packages("RColorBrewer")
 ```
 
-## Description of Files
-- **presentation-materials**: This folder contains PowerPoint slides and other presentation materials used in the workshop
-- **resources**: This folder contains cheatsheets to assist you during the workshop and links to external sources for you to continue your learning
-
-
-## Post-Class Survey
-If you have taken the live webinar for this class, please take this survey: [Intro to Data Vis in R Survey](https://www.surveymonkey.com/r/datavis_r)
 
 ## JHU Data Services   
 Website: [dataservices.library.jhu.edu/](https://dataservices.library.jhu.edu/)   
@@ -56,4 +48,4 @@ The images, external resources, and cheatsheets linked in this repository may ha
 
 ## Citation
 Please cite this material as:    
-Johns Hopkins University Data Services. September 12, 2023. [Introduction to Data Visualization in R](github.com/jhu-data-services/intro-to-data-visualization-in-r)
+Johns Hopkins University Data Services. March 6, 2026. [Introduction to Data Visualization in R](github.com/jhu-data-services/intro-to-data-visualization-in-r)

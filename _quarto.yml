@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Introduction to Data Visualization in R"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: PresentationMaterials/IntroDataVisR.pdf
+        text: Slides
+      - text: "Cheatsheets"
+        menu:
+          - href: Resources/BaseGraphicsCheatsheet.pdf
+            text: Base Graphics Cheatsheet
+            target: _blank
+          - href: Resources/ggplot2Cheatsheet.pdf
+            text: ggplot2 Cheatsheet
+            target: _blank
+      - text: "In-Class Scripts"
+        menu:
+          - href: In-ClassScripts/lesson-1-base-r.qmd
+            text: Part 1 – Base R
+          - href: In-ClassScripts/lesson-2-ggplot2.qmd
+            text: Part 2 – ggplot2
+format:
+  html:
+    theme: cosmo
+    toc: true

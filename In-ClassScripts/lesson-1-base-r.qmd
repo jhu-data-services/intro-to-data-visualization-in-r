@@ -1,0 +1,476 @@
+---
+title: "Lesson 1 - Base R"
+subtitle: "Introduction to Data Visualization in R"
+author: "JHU Data Services"
+format:
+  html:
+    toc: true
+    toc-float: true
+    toc-depth: 3
+fig-width: 6
+fig-height: 5
+---
+
+```{r}
+#| label: setup
+#| echo: false
+library(RColorBrewer) # Produce visually appealing, colorblind friendly palettes
+```
+
+# Introduction to Data Visualization in R: Base R plotting
+## Meet the penguins!
+
+We will be using the Palmer Penguins dataset for today's visualization exercises. 
+
+
+![Palmer Penguin Illustration](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){width=50%}
+
+Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network. The data were conveniently collected as an R package that we will install (if you haven't already) and use today.
+
+
+### Load the data
+
+---
+
+Let's load in the Palmer penguin data, by importing the `palmerpenguins` package. If you have not already installed this package, you can do so now by running `install.packages('palmerpenguins')` in your R console. 
+```{r}
+#| label: load_data
+#| eval: true
+# load in dataset
+library(palmerpenguins)
+data(package = "palmerpenguins")
+```
+
+
+
+### Explore the data
+
+--- 
+
+Let's explore the contents of the data. We can use the `head` command to look at the first few rows of the data. 
+```{r}
+#| label: explore_data
+#| eval: true
+head(x = penguins)
+```
+
+
+## R Base Graphics
+
+--- 
+
+Visualizing one variable is a useful way to understand the shape of the distribution of the variable in question. 
+
+
+### Histogram 
+
+---
+
+Let's begin with a histogram. We want to visualize the frequency that values in certain ranges occur in our data.
+```{r}
+#| label: histogram
+#| eval: true
+hist(x = penguins$bill_length_mm)
+```
+
+:::instruct
+
+#### Instructor Note:
+
+In descriptive statistics, a box plot (or box and whisker plot) is a method for visualizing a simple summary of the distribution of a continuous variable. A boxplot shows the distribution of data using five summary values: the "minimum", the first (or lower) quartile, the median, the third (or upper) quartile, and the "maximum".
+
+The middle line of the box is the median value. The top and bottom of the box are the "hinges" and corresponds to the lower and upper quartiles respectively. The whiskers extending outward are sometimes called the minimum and maximum, which introduces some confusion. They are actually the minimum and maximum values that *do not exceed a certain distance from the median*. That distance is 1.5 x the IQR. If no value exceeds that distance, than the whiskers *are* the minimum and maximum values.
+
+| Boxplot Element| Description|
+| :------------- |:-------------|
+| Interquartile Range (IQR) | Difference between Q3 and Q1 |
+| Maximum | $Q3 + (1.5*IQR)$| 
+| Minimum | $Q1 - (1.5*IQR)$|
+| Q1      | The median of the lower half of the dataset|   
+| Median | The median of the complete dataset.| 
+| Q3 | The median of the upper half of the dataset|
+:::
+
+
+### Boxplot
+
+---
+
+Boxplots provide a more concise representation of our data. Let's look at a boxplot of bill lengths to better understand how bill lengths are distributed among the penguins studied.
+
+```{r}
+#| label: boxplot
+#| eval: true
+boxplot(x = penguins$bill_length_mm)
+```
+
+That only provides us information for the entire population. Let's look at a boxplot of bill lengths by species to better understand how bill lengths are distributed among individual species of the penguins studied.
+
+```{r}
+#| label: boxplot-species
+#| eval: true
+boxplot(formula = penguins$bill_length_mm ~ penguins$species)
+```
+
+We don't need to explicitly refer to the dataframes columns if we
+provide the data as an argument
+```{r}
+#| label: boxplot-data
+#| eval: true
+boxplot(formula = bill_length_mm ~ species, data = penguins)
+```
+
+We can improve this visualization by removing non-encoding borders, and adding 
+axis labels
+```{r}
+#| label: boxplot-improved
+#| eval: true
+boxplot(formula = bill_length_mm ~ species, 
+        data = penguins,
+        frame = FALSE, 
+        xlab = "Species",
+        ylab = "Bill Length (mm)")
+```
+
+### Scatterplot
+
+---
+
+Visualizing two variables allows you to study the relationship between them. Lets see how the penguin's bill length changes with respect to body mass.
+
+```{r}
+#| label: scatter_plot
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)") 
+```
+
+:::activity
+
+#### Activity:
+
+* What does this plot tell you about the relationship between penguin bill length and body mass? 
+* Do you notice anything unusual in this visualization?
+
+:::
+
+There appears to be a correlation between body mass and bill length. There appears to be an overall linear trend, but there appears to be some outliers in the upper left portion of the plot. Perhaps we can elucidate what is happening here by plotting more information. Let's color by species to see how species impacts this relationship.
+
+```{r}
+#| label: scatter_plot_by_species
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species)
+```
+
+Now we don't know what these colors mean, we need to add a legend:
+```{r}
+#| label: scatter_plot_by_species_leg
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)") 
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 21)
+```
+
+
+### Creating a publication ready plot
+
+Let's begin by giving the plot meaningful axis titles using the `xlab` and `ylab` arguments for the x and y axes respectively.
+
+```{r}
+#| label: scatter_plot_by_species_axis_labels
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)")
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 21)
+```
+
+Now let's add a title using the `main` argument.
+```{r}
+#| label: scatter_plot_by_species_title
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass")
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 21)
+```
+
+Lets make the scatter points more visible using `pch` (plotting character), which controls the geometric shape used to represent our data. In this case, let's switch from the open circle to the solid circle.
+```{r}
+#| label: scatter_plot_by_species_points
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16)
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16)
+```
+
+Now let's increase the size of our points using the `cex` argument. `cex` controls the amount by which plotted symbols should be scaled. 1 is the default, 1.5 is 50% larger, .5 is 50% smaller, etc.
+```{r}
+#| label: scatter_plot_by_species_size
+#| eval: true
+plot(x = penguins$body_mass_g, 
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2)
+```
+
+:::activity
+
+#### Activity:
+
+Can you identify any problems with the default color scheme?
+
+:::
+
+Let's use a colorblind friendly color palette. We will use the `RColorBrewer` package to generate a colorblind friendly palette. 
+
+```{r}
+#| label: colorblind_friendly
+#| eval: true
+#| echo: true
+display.brewer.all(colorblindFriendly = TRUE)
+```
+
+```{r}
+#| label: scatter_plot_by_species_color
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+colorblind_palette <- brewer.pal(n = 3, name = "Dark2")
+
+palette(value = colorblind_palette)
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2)
+```
+
+Now let's add a grid:
+```{r}
+#| label: scatter_plot_by_species_grid
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+colorblind_palette <- brewer.pal(n = 3, name = "Dark2")
+
+palette(value = colorblind_palette)
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2)
+grid()
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2)
+```
+
+Now let's remove unnecessary borders using the `bty` argument.
+```{r}
+#| label: scatter_plot_by_species_border
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+colorblind_palette <- brewer.pal(n = 3, name = "Dark2")
+
+palette(value = colorblind_palette)
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l")
+grid()
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2)
+```
+
+Now let's increase the size of our labels.
+```{r}
+#| label: scatter_plot_by_species_label_size
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+colorblind_palette <- brewer.pal(n = 3, name = "Dark2")
+
+palette(value = colorblind_palette)
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length (mm)",
+     main = "Bill length and body mass",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l",
+     cex.axis = 1.2,
+     cex.lab = 1.3,
+     cex.main = 1.5)
+grid()
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2)
+```
+
+Finally, let's left justify our plot tile and add a subtitle. We will use the margin text (`mtext`) command to annotate our plot in the margins. This is the easiest way to place a title and subtitle with fine control over its positioning.
+```{r}
+#| label: scatter_plot_by_species_title_left
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+colorblind_palette <- brewer.pal(n = 3, name = "Dark2")
+
+palette(value = colorblind_palette)
+
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l",
+     cex.axis = 1.2,
+     cex.lab = 1.3,
+     cex.main = 1.5)
+mtext(
+  text = "Bill length and body mass",
+  side = 3,
+  adj = 0,
+  line = 2,
+  cex = 1.4,
+  font = 2
+)
+
+mtext(
+  text = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+  side = 3,
+  adj = 0,
+  line = 1,
+  cex = .9,
+  font = 2
+)
+
+grid()
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2,
+       bty = "n")
+```
+
+Now, let's save the resulting publication ready figure:
+
+```{r}
+#| label: scatter_plot_by_species_save
+#| eval: true
+
+# let's "brew" a colorblind friendly color palette using rcolorbrewer
+color_friendly_palette  <- brewer.pal(n = 3, name = "Dark2")
+
+pdf(file = "penguin_mass_comparison.pdf", 
+    height = 5,
+    width = 8)
+plot(x = penguins$body_mass_g,
+     y = penguins$bill_length_mm,
+     col = penguins$species,
+     xlab = "Body Mass (g)",
+     ylab = "Bill Length",
+     pch = 16,
+     cex = 1.2, 
+     bty = "l",
+     cex.axis = 1.2,
+     cex.lab = 1.3,
+     cex.main = 1.5)
+mtext(
+  text = "Bill length and body mass",
+  side = 3,
+  adj = 0,
+  line = 2,
+  cex = 1.4,
+  font = 2
+)
+
+mtext(
+  text = "Measurements for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+  side = 3,
+  adj = 0,
+  line = 1,
+  cex = .9,
+  font = 2
+)
+
+grid()
+legend(x = "bottomright", 
+       legend = unique(penguins$species),
+       col = unique(penguins$species),
+       pch = 16,
+       cex = 1.2,
+       bty = "n")
+dev.off()
+```
