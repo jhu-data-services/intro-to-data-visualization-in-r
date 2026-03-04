@@ -98,6 +98,21 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-scripts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-Class Scripts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-scripts">    
+        <li>
+    <a class="dropdown-item" href="./In-ClassScripts/lesson-1-base-r.html" target="_blank">
+ <span class="dropdown-text">Part 1 – Base R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./In-ClassScripts/lesson-2-ggplot2.html" target="_blank">
+ <span class="dropdown-text">Part 2 – ggplot2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cheatsheets" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Cheatsheets</span>
     </a>
@@ -109,21 +124,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./Resources/ggplot2Cheatsheet.pdf" target="_blank">
  <span class="dropdown-text">ggplot2 Cheatsheet</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-scripts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">In-Class Scripts</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-scripts">    
-        <li>
-    <a class="dropdown-item" href="./In-ClassScripts/lesson-1-base-r.html">
- <span class="dropdown-text">Part 1 – Base R</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./In-ClassScripts/lesson-2-ggplot2.html">
- <span class="dropdown-text">Part 2 – ggplot2</span></a>
   </li>  
     </ul>
   </li>
@@ -143,19 +143,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-data-visualization-in-r" id="toc-introduction-to-data-visualization-in-r" class="nav-link active" data-scroll-target="#introduction-to-data-visualization-in-r">Introduction to Data Visualization in R</a>
-  <ul class="collapse">
-  <li><a href="#post-class-survey" id="toc-post-class-survey" class="nav-link" data-scroll-target="#post-class-survey">Post-Class Survey</a></li>
+  <li><a href="#post-class-survey" id="toc-post-class-survey" class="nav-link active" data-scroll-target="#post-class-survey">Post-Class Survey</a></li>
   <li><a href="#workshop-materials" id="toc-workshop-materials" class="nav-link" data-scroll-target="#workshop-materials">Workshop Materials</a>
   <ul class="collapse">
   <li><a href="#presentation-slides" id="toc-presentation-slides" class="nav-link" data-scroll-target="#presentation-slides">Presentation Slides</a></li>
   <li><a href="#completed-code" id="toc-completed-code" class="nav-link" data-scroll-target="#completed-code">Completed Code</a></li>
   <li><a href="#cheatsheets" id="toc-cheatsheets" class="nav-link" data-scroll-target="#cheatsheets">Cheatsheets</a></li>
   </ul></li>
+  <li><a href="#additional-data-visualization-in-r-resources" id="toc-additional-data-visualization-in-r-resources" class="nav-link" data-scroll-target="#additional-data-visualization-in-r-resources">Additional Data Visualization in R Resources</a></li>
   <li><a href="#jhu-data-services" id="toc-jhu-data-services" class="nav-link" data-scroll-target="#jhu-data-services">JHU Data Services</a></li>
   <li><a href="#license-and-terms-of-use" id="toc-license-and-terms-of-use" class="nav-link" data-scroll-target="#license-and-terms-of-use">License and Terms of Use</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -181,8 +179,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction-to-data-visualization-in-r" class="level1">
-<h1>Introduction to Data Visualization in R</h1>
 <p>Workshop materials and instructions for the <em>Introduction to Data Visualization in R</em> virtual workshop, led by JHU Data Services.</p>
 <p>This workshop introduces data visualization in R using base R and <code>ggplot2</code>. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.</p>
 <section id="post-class-survey" class="level2">
@@ -212,6 +208,12 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
+<section id="additional-data-visualization-in-r-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-data-visualization-in-r-resources">Additional Data Visualization in R Resources</h2>
+<ul>
+<li><a href="https://github.com/jhu-data-services/data-visualization-resources">Additional Data Vis in R Resources</a></li>
+</ul>
+</section>
 <section id="jhu-data-services" class="level2">
 <h2 class="anchored" data-anchor-id="jhu-data-services">JHU Data Services</h2>
 <p>Website: <a href="https://dataservices.library.jhu.edu/">dataservices.library.jhu.edu</a> Contact us: <a href="mailto:dataservices@jhu.edu">dataservices@jhu.edu</a></p>
@@ -228,7 +230,6 @@ ul.task-list li input[type="checkbox"] {
 <p>Please cite this material as: Johns Hopkins University Data Services. March 4, 2026. <a href="https://github.com/jhu-data-services/intro-to-data-visualization-in-r">Introduction to Data Visualization in R</a></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

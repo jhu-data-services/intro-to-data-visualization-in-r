@@ -4,42 +4,49 @@
     "href": "index.html",
     "title": "Introduction to Data Visualization in R",
     "section": "",
-    "text": "Workshop materials and instructions for the Introduction to Data Visualization in R virtual workshop, led by JHU Data Services.\nThis workshop introduces data visualization in R using base R and ggplot2. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.\n\n\nIf you have taken the live webinar for this class, please take this survey: Intro to Data Vis in R Survey\n\n\n\n\n\n\nPresentation Slides (PDF)\n\n\n\n\n\nBase R\nggplot2\n\n\n\n\n\nBase Graphics Cheatsheet\nggplot2 Cheatsheet\n\n\n\n\n\nWebsite: dataservices.library.jhu.edu Contact us: dataservices@jhu.edu\nJHU Data Services, part of the Johns Hopkins University Sheridan Libraries, helps the JHU community find, use, visualize, manage, and share data. We offer live webinars and self-paced online trainings on computational research and coding, GIS, data management, data visualization, and more. See all of our training topics on our website.\n\n\n\nThe presentation materials are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), attributable to Data Services, Johns Hopkins University.\nSee LICENSE file for additional code licensing and re-use information.\nThe images, external resources, and cheatsheets linked in this repository may have other licenses and terms of use.\n\n\n\nPlease cite this material as: Johns Hopkins University Data Services. March 4, 2026. Introduction to Data Visualization in R"
+    "text": "Workshop materials and instructions for the Introduction to Data Visualization in R virtual workshop, led by JHU Data Services.\nThis workshop introduces data visualization in R using base R and ggplot2. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2."
   },
   {
     "objectID": "index.html#post-class-survey",
     "href": "index.html#post-class-survey",
     "title": "Introduction to Data Visualization in R",
-    "section": "",
-    "text": "If you have taken the live webinar for this class, please take this survey: Intro to Data Vis in R Survey"
+    "section": "Post-Class Survey",
+    "text": "Post-Class Survey\nIf you have taken the live webinar for this class, please take this survey: Intro to Data Vis in R Survey"
   },
   {
     "objectID": "index.html#workshop-materials",
     "href": "index.html#workshop-materials",
     "title": "Introduction to Data Visualization in R",
-    "section": "",
-    "text": "Presentation Slides (PDF)\n\n\n\n\n\nBase R\nggplot2\n\n\n\n\n\nBase Graphics Cheatsheet\nggplot2 Cheatsheet"
+    "section": "Workshop Materials",
+    "text": "Workshop Materials\n\nPresentation Slides\n\nPresentation Slides (PDF)\n\n\n\nCompleted Code\n\nBase R\nggplot2\n\n\n\nCheatsheets\n\nBase Graphics Cheatsheet\nggplot2 Cheatsheet"
+  },
+  {
+    "objectID": "index.html#additional-data-visualization-in-r-resources",
+    "href": "index.html#additional-data-visualization-in-r-resources",
+    "title": "Introduction to Data Visualization in R",
+    "section": "Additional Data Visualization in R Resources",
+    "text": "Additional Data Visualization in R Resources\n\nAdditional Data Vis in R Resources"
   },
   {
     "objectID": "index.html#jhu-data-services",
     "href": "index.html#jhu-data-services",
     "title": "Introduction to Data Visualization in R",
-    "section": "",
-    "text": "Website: dataservices.library.jhu.edu Contact us: dataservices@jhu.edu\nJHU Data Services, part of the Johns Hopkins University Sheridan Libraries, helps the JHU community find, use, visualize, manage, and share data. We offer live webinars and self-paced online trainings on computational research and coding, GIS, data management, data visualization, and more. See all of our training topics on our website."
+    "section": "JHU Data Services",
+    "text": "JHU Data Services\nWebsite: dataservices.library.jhu.edu Contact us: dataservices@jhu.edu\nJHU Data Services, part of the Johns Hopkins University Sheridan Libraries, helps the JHU community find, use, visualize, manage, and share data. We offer live webinars and self-paced online trainings on computational research and coding, GIS, data management, data visualization, and more. See all of our training topics on our website."
   },
   {
     "objectID": "index.html#license-and-terms-of-use",
     "href": "index.html#license-and-terms-of-use",
     "title": "Introduction to Data Visualization in R",
-    "section": "",
-    "text": "The presentation materials are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), attributable to Data Services, Johns Hopkins University.\nSee LICENSE file for additional code licensing and re-use information.\nThe images, external resources, and cheatsheets linked in this repository may have other licenses and terms of use."
+    "section": "License and Terms of Use",
+    "text": "License and Terms of Use\nThe presentation materials are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), attributable to Data Services, Johns Hopkins University.\nSee LICENSE file for additional code licensing and re-use information.\nThe images, external resources, and cheatsheets linked in this repository may have other licenses and terms of use."
   },
   {
     "objectID": "index.html#citation",
     "href": "index.html#citation",
     "title": "Introduction to Data Visualization in R",
-    "section": "",
-    "text": "Please cite this material as: Johns Hopkins University Data Services. March 4, 2026. Introduction to Data Visualization in R"
+    "section": "Citation",
+    "text": "Citation\nPlease cite this material as: Johns Hopkins University Data Services. March 4, 2026. Introduction to Data Visualization in R"
   },
   {
     "objectID": "In-ClassScripts/lesson-1-base-r.html",

@@ -9,6 +9,14 @@ website:
         text: Home
       - href: PresentationMaterials/IntroDataVisR.pdf
         text: Slides
+      - text: "In-Class Scripts"
+        menu:
+          - href: In-ClassScripts/lesson-1-base-r.qmd
+            text: Part 1 – Base R
+            target: _blank
+          - href: In-ClassScripts/lesson-2-ggplot2.qmd
+            text: Part 2 – ggplot2
+            target: _blank
       - text: "Cheatsheets"
         menu:
           - href: Resources/BaseGraphicsCheatsheet.pdf
@@ -17,12 +25,6 @@ website:
           - href: Resources/ggplot2Cheatsheet.pdf
             text: ggplot2 Cheatsheet
             target: _blank
-      - text: "In-Class Scripts"
-        menu:
-          - href: In-ClassScripts/lesson-1-base-r.qmd
-            text: Part 1 – Base R
-          - href: In-ClassScripts/lesson-2-ggplot2.qmd
-            text: Part 2 – ggplot2
 format:
   html:
     theme: cosmo

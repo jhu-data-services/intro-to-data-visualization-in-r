@@ -5,8 +5,6 @@ format:
    toc: true
 ---
 
-# Introduction to Data Visualization in R
-
 Workshop materials and instructions for the *Introduction to Data Visualization in R* virtual workshop, led by JHU Data Services.
 
 This workshop introduces data visualization in R using base R and `ggplot2`. In this hands-on workshop, we cover design concepts of data visualization and popular R packages, before diving into creating data visualizations for a prepared dataset using base R and ggplot2.
@@ -30,6 +28,10 @@ If you have taken the live webinar for this class, please take this survey: [Int
 
 - [Base Graphics Cheatsheet](Resources/BaseGraphicsCheatsheet.pdf)
 - [ggplot2 Cheatsheet](Resources/ggplot2Cheatsheet.pdf)
+
+## Additional Data Visualization in R Resources
+
+- [Additional Data Vis in R Resources](https://github.com/jhu-data-services/data-visualization-resources)
 
 ## JHU Data Services
 
